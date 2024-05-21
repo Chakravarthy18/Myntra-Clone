@@ -33,6 +33,11 @@ jobs:
           docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
           docker push chakri18/myntra:latest
           
-     - name: Run the container
-        run: docker run -d --name myntra -p 3000:3000 chakri18/myntra:latest
-    
+  deploy:
+   needs: build  
+   runs-on: [self-hosted]
+   steps:
+    - name: docker pull image
+      run: docker pull chakri18/myntra:latest
+    - name: Deploy to container
+      run: docker run -d --name game -p 3000:3000 chakri18/myntra:latest
