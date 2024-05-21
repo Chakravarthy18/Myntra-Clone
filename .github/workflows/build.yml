@@ -41,3 +41,6 @@ jobs:
       run: docker pull chakri18/myntra:latest
     - name: Deploy to container
       run: docker run -d --name game -p 3000:3000 chakri18/myntra:latest
+
+    - name: Update kubeconfig
+      run: aws eks --region us-east-1 update-kubeconfig --name EKS-24
